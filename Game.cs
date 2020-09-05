@@ -37,6 +37,7 @@ namespace HelloWorld
                                 enemyAttack = 20;
                                 enemyDefense = 5;
                                 enemyName = "Wizard";
+                                break;
                             }
                         case 1:
                             {
@@ -44,6 +45,7 @@ namespace HelloWorld
                                 enemyAttack = 30;
                                 enemyDefense = 5;
                                 enemyName = "Troll";
+                                break;
                             }
                         case 2:
                             {
@@ -52,6 +54,7 @@ namespace HelloWorld
                                 enemyAttack = 40;
                                 enemyDefense = 10;
                                 enemyName = "Giant";
+                                break;
                             }
                     }
 
@@ -64,7 +67,7 @@ namespace HelloWorld
 
                         //Get input from the player
                         char input;
-                        GetInput(input, "Attack", "Defend");
+                        GetInput(out input, "Attack", "Defend");
                         //If input is 1, the player wants to attack. By default the enemy blocks any incoming attack
                         if (input == '1')
                         {
@@ -156,14 +159,17 @@ namespace HelloWorld
                 case 0:
                     {
                         Console.WriteLine("A wizard blocks your path");
+                        break;
                     }
                 case 1:
                     {
                         Console.WriteLine("A troll stands before you");
+                        break;
                     }
                 case 2:
                     {
                         Console.WriteLine("A giant has appeared!");
+                        break;
                     }
                 default:
                     {
@@ -205,6 +211,7 @@ namespace HelloWorld
                             _playerHealth = 120;
                             _playerDefense = 10;
                             _playerDamage = 40;
+                            break;
                         }
                     case '2':
                         {
@@ -212,6 +219,7 @@ namespace HelloWorld
                             _playerHealth = 40;
                             _playerDefense = 2;
                             _playerDamage = 70;
+                            break;
                         }
                     case '3':
                         {
@@ -219,6 +227,7 @@ namespace HelloWorld
                             _playerHealth = 200;
                             _playerDefense = 5;
                             _playerDamage = 25;
+                            break;
                         }
                     //If an invalid input is selected display and input message and input over again.
                     default:
