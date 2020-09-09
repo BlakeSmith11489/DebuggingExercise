@@ -10,7 +10,7 @@ namespace HelloWorld
         bool _gameOver = false;
         string _playerName = "Hero";
         int _playerHealth = 120;
-        int _playerDamage = 20;
+        int _playerDamage = 2000;
         int _playerDefense = 10;
         int levelScaleMax = 5;
         //Run the game
@@ -80,6 +80,13 @@ namespace HelloWorld
                     Console.WriteLine("You dealt " + _playerDamage + " damage.");
                     Console.Write("> ");
                     Console.ReadKey();
+
+                    //After the player attacks, the enemy takes its turn. Since the player decided not to defend, the block attack function is not called.
+                    _playerHealth -= enemyAttack;
+                    Console.WriteLine(enemyName + " dealt " + enemyAttack + " damage.");
+                    Console.Write("> ");
+                    Console.ReadKey();
+                    turnCount++;
                 }
                 //If the player decides to defend the enemy just takes their turn. However this time the block attack function is
                 //called instead of simply decrementing the health by the enemy's attack value.
@@ -93,13 +100,6 @@ namespace HelloWorld
                     Console.Clear();
                 }
                 Console.Clear();
-                //After the player attacks, the enemy takes its turn. Since the player decided not to defend, the block attack function is not called.
-                _playerHealth -= enemyAttack;
-                Console.WriteLine(enemyName + " dealt " + enemyAttack + " damage.");
-                Console.Write("> ");
-                Console.ReadKey();
-                turnCount++;
-
             }
             //Return whether or not our player died
             return _playerHealth != 0;
@@ -125,9 +125,48 @@ namespace HelloWorld
             {
                 scale = 1;
             }
-            _playerHealth += 10 * scale;
-            _playerDamage *= scale;
-            _playerDefense *= scale;
+            char statInput = ' ';
+            while (statInput != '1' && statInput != '2' && statInput != '3')
+            {
+                Console.Clear();
+                Console.WriteLine("Chose which stat to increase.");
+                Console.WriteLine("1.Health");
+                Console.WriteLine("2.Damage");
+                Console.WriteLine("3.Defense");
+                Console.Write(">");
+                statInput = Console.ReadKey().KeyChar;
+
+                switch (statInput)
+                {
+                    case '1':
+                        {
+                            _playerHealth *= scale;
+                            break;
+                        }
+                    case '2':
+                        {
+                            _playerDamage *= scale;
+                            break;
+                        }
+                    case '3':
+                        {
+                            _playerDefense *= scale;
+                            break;
+                        }
+                    //If Input is not selected display a message and input once more
+                    default:
+                        {
+                            Console.WriteLine("Invalid input. Press any key to continue.");
+                            Console.Write(">");
+                            Console.ReadKey();
+                            break;
+                        }
+                }
+                Console.Clear();
+            }
+            //_playerHealth += 10 * scale;
+            //_playerDamage *= scale;
+            //_playerDefense *= scale;
         }
         //Gets input from the player
         //Out's the char variable given. This variables stores the player's input choice.
@@ -138,10 +177,12 @@ namespace HelloWorld
             input = ' ';
             //Loop until the player enters a valid input
             while (input != '1' && input != '2')
+            {
                 Console.WriteLine("1." + option1);
-            Console.WriteLine("2." + option2);
-            Console.Write("> ");
-            input = Console.ReadKey().KeyChar;
+                Console.WriteLine("2." + option2);
+                Console.Write("> ");
+                input = Console.ReadKey().KeyChar;
+            }
         }
 
         //Prints the stats given in the parameter list to the console
@@ -187,6 +228,7 @@ namespace HelloWorld
             {
                 LevelUp(turnCount);
                 ClimbLadder(roomNum++);
+                Console.Clear();
             }
             _gameOver = true;
 
@@ -227,7 +269,7 @@ namespace HelloWorld
                         }
                     case '3':
                         {
-                            _playerName = "Sif The Great Grey Wolf";
+                            _playerName = "Sif";
                             _playerHealth = 200;
                             _playerDefense = 5;
                             _playerDamage = 25;
